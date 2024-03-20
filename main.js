@@ -5,30 +5,47 @@ const iconOpen = document.querySelector(".fa-bars");
 const iconClose = document.querySelector(".fa-close");
 const menuCon = document.getElementById("menucontainer");
 
-menuCon.addEventListener("click", () => {
+// Function to open menu
+function openMenu() {
+  menuaccCon.style.opacity = "1";
+  menuaccCon.style.height = "100vh";
+}
+
+// Function to close menu
+function closeMenu() {
   menuaccCon.style.opacity = "0";
   menuaccCon.style.height = "0";
+}
+
+// Event listeners
+
+menuCon.addEventListener("click", () => {
+  closeMenu();
 });
 
 toggleOpen.addEventListener("click", () => {
-  menuaccCon.style.opacity = "1";
-  menuaccCon.style.height = "100vh";
+  openMenu();
 });
 
 toggleClose.addEventListener("click", () => {
-  menuaccCon.style.opacity = "0";
-  menuaccCon.style.height = "0";
+  closeMenu();
 });
 
-window.addEventListener("resize", () => {
+// Function to handle resize event
+function handleResize() {
   const mq = window.matchMedia("(min-width: 769px)");
 
   if (mq.matches) {
-    // window width is at least 500px
-    console.log("Higher 769");
-    menuaccCon.style.opacity = "1";
+    // Apply styles when window width is at least 769px
+    openMenu();
+  } else {
+    // Apply styles when window width is less than 769px
+    closeMenu();
   }
-});
+}
 
-// menuaccCon.style.opacity = "1"
-// menuaccCon.style.height = "100vh"
+// Event listener for window resize
+window.addEventListener("resize", handleResize);
+
+// Initialize menu state based on window width
+handleResize();
